@@ -1,42 +1,34 @@
+package asheb.arrowshack;
+
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.editor.impl.EditorComponentImpl;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.wm.WindowManager;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.AWTEventListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class ArrowsHackProjectComponent implements ProjectComponent {
   public ArrowsHackProjectComponent(Project project) {
   }
 
   public void initComponent() {
-    WindowManager wm = WindowManager.getInstance();
-    JFrame frame = wm.getFrame(null);
 
-    frame.addKeyListener(new KeyListener() {
-      @Override
-      public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped: " + e);
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed: " + e);
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e) {
-        System.out.println("keyReleased: " + e);
-      }
-    });
-
+//    FocusManager.setCurrentManager(new FocusManager() {
+//      private int i = 0;
+//
+//      @Override
+//      public void processKeyEvent(Component focusedComponent, KeyEvent e) {
+//        System.out.println((i++) + " -- " + e);
+//        super.processKeyEvent(focusedComponent, e);
+//      }
+//    });
 
     Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+
+      private int i = 0;
+
       @SuppressWarnings("deprecation")
       @Override
       public void eventDispatched(AWTEvent e) {
@@ -81,22 +73,22 @@ public class ArrowsHackProjectComponent implements ProjectComponent {
             ke.setModifiers(ke.getModifiers() & ~KeyEvent.ALT_MASK | addMods);
           }
 
-          if (ke.getKeyCode() == KeyEvent.VK_ALT)
+          if ((ke.getKeyCode() == KeyEvent.VK_ALT) ||
+              (ke.getKeyCode() == 0 && Character.getNumericValue(ke.getKeyChar()) == -1)) {
             ke.consume();
+            System.out.println("-- consumed --");
+          }
         }
 
-        //System.out.println("--: " + e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
+        System.out.println((i++) + " :--: " + e);//e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
       }
 
     }, AWTEvent.KEY_EVENT_MASK);
 
-    System.out.println("oke!!");
   }
 
   public void disposeComponent() {
-    // TODO: insert component disposal logic here
-
-    System.out.println("disposing");
+    //>
   }
 
   @NotNull

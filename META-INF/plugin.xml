@@ -1,12 +1,11 @@
 <idea-plugin version="2">
-  <id>com.yourcompany.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>asheb.arrowshack.plugin.id</id>
+  <name>ALT+IJKL Arrows Hack</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="a.sheboltaev@gmail.com">Alexander Sheboltaev</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      Makes ALT+IJKL work outside editors.
     ]]></description>
 
   <change-notes><![CDATA[
@@ -35,7 +34,7 @@
   <project-components>
     <!-- Add your project components here -->
     <component>
-      <implementation-class>ArrowsHackProjectComponent</implementation-class>
+      <implementation-class>asheb.arrowshack.ArrowsHackProjectComponent</implementation-class>
     </component>
   </project-components>
 
