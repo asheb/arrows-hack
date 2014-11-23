@@ -62,25 +62,26 @@ public class ArrowsHackProjectComponent implements ProjectComponent {
 
 
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused instanceof EditorComponentImpl) {
+        if (focused instanceof EditorComponentImpl && c != ';') {
           // leave event untouched
         }
         else {
 
           if (keyCode >= 0 && ke.isAltDown()) {
             ke.setKeyCode(keyCode);
-            ke.setKeyChar(KeyEvent.CHAR_UNDEFINED);
+            ke.setKeyChar(keyCode == KeyEvent.VK_ENTER ? '\n' : KeyEvent.CHAR_UNDEFINED);
             ke.setModifiers(ke.getModifiers() & ~KeyEvent.ALT_MASK | addMods);
           }
 
+          int cc = (int) ke.getKeyChar();
           if ((ke.getKeyCode() == KeyEvent.VK_ALT) ||
-              (ke.getKeyCode() == 0 && Character.getNumericValue(ke.getKeyChar()) == -1)) {
+              (ke.getKeyCode() == 0 && (cc == 65535 || cc == 9787 || cc == 9688))) {
             ke.consume();
             System.out.println("-- consumed --");
           }
         }
 
-        System.out.println((i++) + " :--: " + e);//e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
+        System.out.println((i++) + " :--: " + ((int) ke.getKeyChar()) + e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
       }
 
     }, AWTEvent.KEY_EVENT_MASK);
