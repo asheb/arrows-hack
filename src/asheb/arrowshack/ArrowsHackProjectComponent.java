@@ -77,11 +77,11 @@ public class ArrowsHackProjectComponent implements ProjectComponent {
           if ((ke.getKeyCode() == KeyEvent.VK_ALT) ||
               (ke.getKeyCode() == 0 && (cc == 65535 || cc == 9787 || cc == 9688))) {
             ke.consume();
-            System.out.println("-- consumed --");
+            //System.out.println("-- consumed --");
           }
         }
 
-        System.out.println((i++) + " :--: " + ((int) ke.getKeyChar()) + e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
+        //System.out.println((i++) + " :--: " + ((int) ke.getKeyChar()) + e.paramString().substring(4, 9) + " keyCode: " + ke.getKeyCode() + " keyChar: " + ke.getKeyChar());
       }
 
     }, AWTEvent.KEY_EVENT_MASK);
